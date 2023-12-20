@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "471760942637",
+    "project_id": "mobdev-finals",
+    "storage_bucket": "mobdev-finals.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:471760942637:android:13609578e630479385eaa4",
+        "android_client_info": {
+          "package_name": "com.example.mobdev_final_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBg2zxBCeNUOdJB5JM-bSBUtABSl7SYFkk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
