@@ -1,9 +1,11 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:mobdev_final_app/screen/SignUP.dart';
 import 'package:mobdev_final_app/screen/login.dart';
 
 class Auth_Page extends StatefulWidget {
-  Auth_Page({super.key});
+  const Auth_Page({super.key});
 
   @override
   State<Auth_Page> createState() => _Auth_PageState();

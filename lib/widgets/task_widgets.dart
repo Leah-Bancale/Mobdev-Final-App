@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types, non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:mobdev_final_app/const/colors.dart';
 import 'package:mobdev_final_app/data/firestore.dart';
@@ -5,8 +7,8 @@ import 'package:mobdev_final_app/model/notes_model.dart';
 import 'package:mobdev_final_app/screen/edit_screen.dart';
 
 class Task_Widget extends StatefulWidget {
-  Note _note;
-  Task_Widget(this._note, {super.key});
+  final Note _note;
+  const Task_Widget(this._note, {super.key});
 
   @override
   State<Task_Widget> createState() => _Task_WidgetState();
@@ -29,7 +31,7 @@ class _Task_WidgetState extends State<Task_Widget> {
               color: Colors.grey.withOpacity(0.2),
               spreadRadius: 5,
               blurRadius: 7,
-              offset: Offset(0, 2),
+              offset: const Offset(0, 2),
             ),
           ],
         ),
@@ -39,19 +41,19 @@ class _Task_WidgetState extends State<Task_Widget> {
             children: [
               // image
               imageee(),
-              SizedBox(width: 25),
+              const SizedBox(width: 25),
               // title and subtitle
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           widget._note.title,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
@@ -76,7 +78,7 @@ class _Task_WidgetState extends State<Task_Widget> {
                           fontWeight: FontWeight.w400,
                           color: Colors.grey.shade400),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     edit_time()
                   ],
                 ),
@@ -108,10 +110,10 @@ class _Task_WidgetState extends State<Task_Widget> {
               child: Row(
                 children: [
                   Image.asset('images/icon_time.png'),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Text(
                     widget._note.time,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -121,7 +123,7 @@ class _Task_WidgetState extends State<Task_Widget> {
               ),
             ),
           ),
-          SizedBox(width: 20),
+          const SizedBox(width: 20),
           GestureDetector(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
@@ -132,7 +134,7 @@ class _Task_WidgetState extends State<Task_Widget> {
               width: 90,
               height: 28,
               decoration: BoxDecoration(
-                color: Color(0xffE2F6F1),
+                color: const Color(0xffE2F6F1),
                 borderRadius: BorderRadius.circular(18),
               ),
               child: Padding(
@@ -143,8 +145,8 @@ class _Task_WidgetState extends State<Task_Widget> {
                 child: Row(
                   children: [
                     Image.asset('images/icon_edit.png'),
-                    SizedBox(width: 10),
-                    Text(
+                    const SizedBox(width: 10),
+                    const Text(
                       'edit',
                       style: TextStyle(
                         fontSize: 14,

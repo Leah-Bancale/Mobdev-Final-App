@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:mobdev_final_app/const/colors.dart';
@@ -23,11 +25,11 @@ class _Home_ScreenState extends State<Home_Screen> {
         child: FloatingActionButton(
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => Add_creen(),
+              builder: (context) => const Add_creen(),
             ));
           },
           backgroundColor: custom_green,
-          child: Icon(Icons.add, size: 30),
+          child: const Icon(Icons.add, size: 30),
         ),
       ),
       body: SafeArea(

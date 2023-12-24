@@ -1,12 +1,17 @@
+// ignore_for_file: camel_case_types, non_constant_identifier_names
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mobdev_final_app/model/notes_model.dart';
 import 'package:uuid/uuid.dart';
+import 'package:logger/logger.dart';
 
 class Firestore_Datasource {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  final Logger _logger = Logger();
 
   Future<bool> CreateUser(String email) async {
     try {
@@ -16,15 +21,15 @@ class Firestore_Datasource {
           .set({"id": _auth.currentUser!.uid, "email": email});
       return true;
     } catch (e) {
-      print(e);
-      return true;
+      _logger.e("Error: $e");
+      return false;
     }
   }
 
   Future<bool> AddNote(String subtitle, String title, int image) async {
     try {
-      var uuid = Uuid().v4();
-      DateTime data = new DateTime.now();
+      var uuid = const Uuid().v4();
+      DateTime data = DateTime.now();
       await _firestore
           .collection('users')
           .doc(_auth.currentUser!.uid)
@@ -40,8 +45,8 @@ class Firestore_Datasource {
       });
       return true;
     } catch (e) {
-      print(e);
-      return true;
+      _logger.e("Error: $e");
+      return false;
     }
   }
 
@@ -60,8 +65,8 @@ class Firestore_Datasource {
       }).toList();
       return notesList;
     } catch (e) {
-      print(e);
-      return [];
+      _logger.e("Error: $e");
+      return[];
     }
   }
 
@@ -84,15 +89,15 @@ class Firestore_Datasource {
           .update({'isDon': isDon});
       return true;
     } catch (e) {
-      print(e);
-      return true;
+      _logger.e("Error: $e");
+      return false;
     }
   }
 
   Future<bool> Update_Note(
       String uuid, int image, String title, String subtitle) async {
     try {
-      DateTime data = new DateTime.now();
+      DateTime data = DateTime.now();
       await _firestore
           .collection('users')
           .doc(_auth.currentUser!.uid)
@@ -106,8 +111,8 @@ class Firestore_Datasource {
       });
       return true;
     } catch (e) {
-      print(e);
-      return true;
+      _logger.e("Error: $e");
+      return false;
     }
   }
 
@@ -121,8 +126,8 @@ class Firestore_Datasource {
           .delete();
       return true;
     } catch (e) {
-      print(e);
-      return true;
+      _logger.e("Error: $e");
+      return false;
     }
   }
 }

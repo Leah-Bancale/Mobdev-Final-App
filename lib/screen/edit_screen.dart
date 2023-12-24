@@ -1,11 +1,13 @@
+// ignore_for_file: camel_case_types, avoid_unnecessary_containers, non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:mobdev_final_app/const/colors.dart';
 import 'package:mobdev_final_app/data/firestore.dart';
 import 'package:mobdev_final_app/model/notes_model.dart';
 
 class Edit_Screen extends StatefulWidget {
-  Note _note;
-  Edit_Screen(this._note, {super.key});
+  final Note _note;
+  const Edit_Screen(this._note, {super.key});
 
   @override
   State<Edit_Screen> createState() => _Edit_ScreenState();
@@ -15,8 +17,8 @@ class _Edit_ScreenState extends State<Edit_Screen> {
   TextEditingController? title;
   TextEditingController? subtitle;
 
-  FocusNode _focusNode1 = FocusNode();
-  FocusNode _focusNode2 = FocusNode();
+  final FocusNode _focusNode1 = FocusNode();
+  final FocusNode _focusNode2 = FocusNode();
   int indexx = 0;
   @override
   void initState() {
@@ -26,6 +28,7 @@ class _Edit_ScreenState extends State<Edit_Screen> {
     subtitle = TextEditingController(text: widget._note.subtitle);
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColors,
@@ -34,11 +37,11 @@ class _Edit_ScreenState extends State<Edit_Screen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             title_widgets(),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             subtite_wedgite(),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             imagess(),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             button()
           ],
         ),
@@ -52,25 +55,25 @@ class _Edit_ScreenState extends State<Edit_Screen> {
       children: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: custom_green,
-            minimumSize: Size(170, 48),
+            backgroundColor: custom_green,
+            minimumSize: const Size(170, 48),
           ),
           onPressed: () {
             Firestore_Datasource().Update_Note(
                 widget._note.id, indexx, title!.text, subtitle!.text);
             Navigator.pop(context);
           },
-          child: Text('add task'),
+          child: const Text('add task'),
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: Colors.red,
-            minimumSize: Size(170, 48),
+            backgroundColor: Colors.red,
+            minimumSize: const Size(170, 48),
           ),
           onPressed: () {
             Navigator.pop(context);
           },
-          child: Text('Cancel'),
+          child: const Text('Cancel'),
         ),
       ],
     );
@@ -78,38 +81,40 @@ class _Edit_ScreenState extends State<Edit_Screen> {
 
   Container imagess() {
     return Container(
-      height: 180,
-      child: ListView.builder(
-        itemCount: 4,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              setState(() {
-                indexx = index;
-              });
-            },
-            child: Padding(
-              padding: EdgeInsets.only(left: index == 0 ? 7 : 0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    width: 2,
-                    color: indexx == index ? custom_green : Colors.grey,
+      child: SizedBox(
+        height: 180,
+        child: ListView.builder(
+          itemCount: 4,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {
+                setState(() {
+                  indexx = index;
+                });
+              },
+              child: Padding(
+                padding: EdgeInsets.only(left: index == 0 ? 7 : 0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      width: 2,
+                      color: indexx == index ? custom_green : Colors.grey,
+                    ),
+                  ),
+                  width: 140,
+                  margin: const EdgeInsets.all(8),
+                  child: Column(
+                    children: [
+                      Image.asset('images/$index.png'),
+                    ],
                   ),
                 ),
-                width: 140,
-                margin: EdgeInsets.all(8),
-                child: Column(
-                  children: [
-                    Image.asset('images/${index}.png'),
-                  ],
-                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
@@ -125,14 +130,14 @@ class _Edit_ScreenState extends State<Edit_Screen> {
         child: TextField(
           controller: title,
           focusNode: _focusNode1,
-          style: TextStyle(fontSize: 18, color: Colors.black),
+          style: const TextStyle(fontSize: 18, color: Colors.black),
           decoration: InputDecoration(
               contentPadding:
-                  EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
               hintText: 'title',
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: Color(0xffc5c5c5),
                   width: 2.0,
                 ),
@@ -161,13 +166,14 @@ class _Edit_ScreenState extends State<Edit_Screen> {
           maxLines: 3,
           controller: subtitle,
           focusNode: _focusNode2,
-          style: TextStyle(fontSize: 18, color: Colors.black),
+          style: const TextStyle(fontSize: 18, color: Colors.black),
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
             hintText: 'subtitle',
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                 color: Color(0xffc5c5c5),
                 width: 2.0,
               ),
