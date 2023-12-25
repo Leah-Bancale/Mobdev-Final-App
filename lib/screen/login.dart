@@ -17,6 +17,8 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
   final email = TextEditingController();
   final password = TextEditingController();
 
+  bool _isPasswordVisible = false;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -41,9 +43,9 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
               SizedBox(height: 20),
               image(),
               SizedBox(height: 50),
-              textfield(email, _focusNode1, 'Email', Icons.email),
+              emailField(email, _focusNode1, 'Email', Icons.email),
               SizedBox(height: 10),
-              textfield(password, _focusNode2, 'Password', Icons.password),
+              passwordField(password, _focusNode2, 'Password', Icons.password),
               SizedBox(height: 8),
               account(),
               SizedBox(height: 20),
@@ -69,7 +71,7 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
           GestureDetector(
             onTap: widget.show,
             child: Text(
-              'Sign UP',
+              'Sign Up',
               style: TextStyle(
                   color: Colors.blue,
                   fontSize: 14,
@@ -84,24 +86,27 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
   Widget Login_bottom() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: GestureDetector(
-        onTap: () {
-          AuthenticationRemote().login(email.text, password.text);
-        },
-        child: Container(
-          alignment: Alignment.center,
-          width: double.infinity,
-          height: 50,
-          decoration: BoxDecoration(
-            color: custom_green,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Text(
-            'LogIn',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 23,
-              fontWeight: FontWeight.bold,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onTap: () {
+            AuthenticationRemote().login(email.text, password.text);
+          },
+          child: Container(
+            alignment: Alignment.center,
+            width: double.infinity,
+            height: 50,
+            decoration: BoxDecoration(
+              color: custom_green,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Text(
+              'Login',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
@@ -109,7 +114,7 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
     );
   }
 
-  Widget textfield(TextEditingController _controller, FocusNode _focusNode,
+  Widget emailField(TextEditingController _controller, FocusNode _focusNode,
       String typeName, IconData iconss) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -149,6 +154,58 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
     );
   }
 
+  Widget passwordField(TextEditingController _controller, FocusNode _focusNode,
+      String typeName, IconData iconss) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: TextField(
+          controller: _controller,
+          focusNode: _focusNode,
+          style: TextStyle(fontSize: 18, color: Colors.black),
+          obscureText: !_isPasswordVisible,
+          decoration: InputDecoration(
+            prefixIcon: Icon(
+              iconss,
+              color: _focusNode.hasFocus ? custom_green : Color(0xffc5c5c5),
+            ),
+            suffixIcon: IconButton(
+              icon: Icon(
+                _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                color: Color(0xffc5c5c5),
+              ),
+              onPressed: () {
+                setState(() {
+                  _isPasswordVisible = !_isPasswordVisible;
+                });
+              },
+            ),
+            contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            hintText: typeName,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                color: Color(0xffc5c5c5),
+                width: 2.0,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                color: custom_green,
+                width: 2.0,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget image() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -157,7 +214,7 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
         height: 300,
         decoration: BoxDecoration(
           color: backgroundColors,
-          image: DecorationImage(
+          image: const DecorationImage(
             image: AssetImage('images/7.png'),
             fit: BoxFit.fitWidth,
           ),
