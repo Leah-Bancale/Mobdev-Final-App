@@ -27,7 +27,11 @@ class _Home_ScreenState extends State<Home_Screen> {
             ));
           },
           backgroundColor: custom_green,
-          child: Icon(Icons.add, size: 30),
+          child: Icon(
+            Icons.add,
+            size: 30,
+            color: Colors.white, // Set icon color to white
+          ),
         ),
       ),
       body: SafeArea(
@@ -49,7 +53,7 @@ class _Home_ScreenState extends State<Home_Screen> {
             children: [
               Stream_note(false),
               Text(
-                'isDone',
+                'Done',
                 style: TextStyle(
                     fontSize: 16,
                     color: Colors.grey.shade500,

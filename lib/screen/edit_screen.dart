@@ -35,7 +35,7 @@ class _Edit_ScreenState extends State<Edit_Screen> {
           children: [
             title_widgets(),
             SizedBox(height: 20),
-            subtite_wedgite(),
+            subtitle_widgets(),
             SizedBox(height: 20),
             imagess(),
             SizedBox(height: 20),
@@ -60,17 +60,23 @@ class _Edit_ScreenState extends State<Edit_Screen> {
                 widget._note.id, indexx, title!.text, subtitle!.text);
             Navigator.pop(context);
           },
-          child: Text('add task'),
+          child: Text(
+            'Add Task',
+            style: TextStyle(color: Colors.white), // Set text color to white
+          ),
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: Colors.red,
+            primary: Color.fromARGB(255, 254, 255, 245),
             minimumSize: Size(170, 48),
           ),
           onPressed: () {
             Navigator.pop(context);
           },
-          child: Text('Cancel'),
+          child: Text(
+            'Cancel',
+            style: TextStyle(color: Colors.black), // Set text color to white
+          ),
         ),
       ],
     );
@@ -127,29 +133,30 @@ class _Edit_ScreenState extends State<Edit_Screen> {
           focusNode: _focusNode1,
           style: TextStyle(fontSize: 18, color: Colors.black),
           decoration: InputDecoration(
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-              hintText: 'title',
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                  color: Color(0xffc5c5c5),
-                  width: 2.0,
-                ),
+            labelText: 'Title', // Add the label for the title field
+            contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            hintText: 'Enter title',
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                color: Color(0xffc5c5c5),
+                width: 2.0,
               ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                  color: custom_green,
-                  width: 2.0,
-                ),
-              )),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                color: custom_green,
+                width: 2.0,
+              ),
+            ),
+          ),
         ),
       ),
     );
   }
 
-  Padding subtite_wedgite() {
+  Padding subtitle_widgets() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Container(
@@ -163,8 +170,9 @@ class _Edit_ScreenState extends State<Edit_Screen> {
           focusNode: _focusNode2,
           style: TextStyle(fontSize: 18, color: Colors.black),
           decoration: InputDecoration(
+            labelText: 'Subtitle', // Add the label for the subtitle field
             contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-            hintText: 'subtitle',
+            hintText: 'Enter subtitle',
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
