@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobdev_final_app/const/colors.dart';
 import 'package:mobdev_final_app/data/auth_data.dart';
-import 'package:google_sign_in/google_sign_in_dart';
 
 class LogIN_Screen extends StatefulWidget {
   final VoidCallback show;
