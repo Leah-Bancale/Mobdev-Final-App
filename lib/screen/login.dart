@@ -1,27 +1,27 @@
-// ignore_for_file: camel_case_types, non_constant_identifier_names
-
 import 'package:flutter/material.dart';
 import 'package:mobdev_final_app/const/colors.dart';
 import 'package:mobdev_final_app/data/auth_data.dart';
 
 class LogIN_Screen extends StatefulWidget {
   final VoidCallback show;
-  const LogIN_Screen(this.show, {super.key});
+  LogIN_Screen(this.show, {super.key});
 
   @override
   State<LogIN_Screen> createState() => _LogIN_ScreenState();
 }
 
 class _LogIN_ScreenState extends State<LogIN_Screen> {
-  final FocusNode _focusNode1 = FocusNode();
-  final FocusNode _focusNode2 = FocusNode();
+  FocusNode _focusNode1 = FocusNode();
+  FocusNode _focusNode2 = FocusNode();
 
   final email = TextEditingController();
   final password = TextEditingController();
 
+  bool _isPasswordVisible = false;
+
   @override
   void initState() {
-    // TODO: #2 implement initState
+    // TODO: implement initState
     super.initState();
     _focusNode1.addListener(() {
       setState(() {});
@@ -40,16 +40,18 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(height: 20),
+              SizedBox(height: 5),
               image(),
-              const SizedBox(height: 50),
-              textfield(email, _focusNode1, 'Email', Icons.email),
-              const SizedBox(height: 10),
-              textfield(password, _focusNode2, 'Password', Icons.password),
-              const SizedBox(height: 8),
+              SizedBox(height: 10),
+              emailField(email, _focusNode1, 'Email', Icons.email),
+              SizedBox(height: 10),
+              passwordField(password, _focusNode2, 'Password', Icons.password),
+              SizedBox(height: 8),
               account(),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               Login_bottom(),
+              SizedBox(height: 20),
+              signInGoogle(),
             ],
           ),
         ),
@@ -67,11 +69,11 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
             "Don't have an account?",
             style: TextStyle(color: Colors.grey[700], fontSize: 14),
           ),
-          const SizedBox(width: 5),
+          SizedBox(width: 5),
           GestureDetector(
             onTap: widget.show,
-            child: const Text(
-              'Sign UP',
+            child: Text(
+              'Sign Up',
               style: TextStyle(
                   color: Colors.blue,
                   fontSize: 14,
@@ -86,24 +88,27 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
   Widget Login_bottom() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: GestureDetector(
-        onTap: () {
-          AuthenticationRemote().login(email.text, password.text);
-        },
-        child: Container(
-          alignment: Alignment.center,
-          width: double.infinity,
-          height: 50,
-          decoration: BoxDecoration(
-            color: custom_green,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: const Text(
-            'LogIn',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 23,
-              fontWeight: FontWeight.bold,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onTap: () {
+            AuthenticationRemote().login(email.text, password.text);
+          },
+          child: Container(
+            alignment: Alignment.center,
+            width: double.infinity,
+            height: 50,
+            decoration: BoxDecoration(
+              color: custom_green,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Text(
+              'Login',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
@@ -111,7 +116,7 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
     );
   }
 
-  Widget textfield(TextEditingController controller, FocusNode focusNode,
+  Widget emailField(TextEditingController _controller, FocusNode _focusNode,
       String typeName, IconData iconss) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -121,21 +126,20 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
           borderRadius: BorderRadius.circular(15),
         ),
         child: TextField(
-          controller: controller,
-          focusNode: focusNode,
-          style: const TextStyle(fontSize: 18, color: Colors.black),
+          controller: _controller,
+          focusNode: _focusNode,
+          style: TextStyle(fontSize: 18, color: Colors.black),
           decoration: InputDecoration(
               prefixIcon: Icon(
                 iconss,
-                color:
-                    focusNode.hasFocus ? custom_green : const Color(0xffc5c5c5),
+                color: _focusNode.hasFocus ? custom_green : Color(0xffc5c5c5),
               ),
               contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  EdgeInsets.symmetric(horizontal: 15, vertical: 15),
               hintText: typeName,
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(
+                borderSide: BorderSide(
                   color: Color(0xffc5c5c5),
                   width: 2.0,
                 ),
@@ -147,6 +151,58 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
                   width: 2.0,
                 ),
               )),
+        ),
+      ),
+    );
+  }
+
+  Widget passwordField(TextEditingController _controller, FocusNode _focusNode,
+      String typeName, IconData iconss) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: TextField(
+          controller: _controller,
+          focusNode: _focusNode,
+          style: TextStyle(fontSize: 18, color: Colors.black),
+          obscureText: !_isPasswordVisible,
+          decoration: InputDecoration(
+            prefixIcon: Icon(
+              iconss,
+              color: _focusNode.hasFocus ? custom_green : Color(0xffc5c5c5),
+            ),
+            suffixIcon: IconButton(
+              icon: Icon(
+                _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                color: Color(0xffc5c5c5),
+              ),
+              onPressed: () {
+                setState(() {
+                  _isPasswordVisible = !_isPasswordVisible;
+                });
+              },
+            ),
+            contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            hintText: typeName,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                color: Color(0xffc5c5c5),
+                width: 2.0,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                color: custom_green,
+                width: 2.0,
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -164,6 +220,48 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
             image: AssetImage('images/7.png'),
             fit: BoxFit.fitWidth,
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget signInGoogle() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: OutlinedButton(
+        onPressed: () {
+          // Call the signInWithGoogle method when the button is pressed
+          // AuthenticationRemote().signInWithGoogle();
+        },
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+          foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              side: BorderSide(color: Colors.black), // Add border color
+            ),
+          ),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset(
+                'images/google.png',
+                width: 24, // Adjust width of the Google logo
+                height: 24, // Adjust height of the Google logo
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12.0),
+              child: Text(
+                'Sign in with Google',
+                style: TextStyle(fontSize: 16), // Adjust text size
+              ),
+            ),
+          ],
         ),
       ),
     );
