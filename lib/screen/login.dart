@@ -233,14 +233,16 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: OutlinedButton(
-        onPressed: () => _handleSignInWithGoogle(context),
+        onPressed: () {
+         AuthenticationRemote().signInWithGoogle();
+        },
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
           foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
-              side: BorderSide(color: Colors.black), // Add border color
+              side: BorderSide(color: Colors.black),
             ),
           ),
         ),
@@ -251,8 +253,8 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
               padding: const EdgeInsets.all(8.0),
               child: Image.asset(
                 'images/google.png',
-                width: 24, // Adjust width of the Google logo
-                height: 24, // Adjust height of the Google logo
+                width: 24,
+                height: 24,
               ),
             ),
             Padding(
@@ -266,29 +268,5 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
         ),
       ),
     );
-  }
-
-  Future<void> _handleSignInWithGoogle(BuildContext context) async {
-    final GoogleSignIn _googleSignIn = GoogleSignIn();
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
-    final GoogleSignInAccount? googleSignInAccount =
-        await _googleSignIn.signIn();
-
-    if (googleSignInAccount != null) {
-      final GoogleSignInAuthentication googleAuth =
-          await googleSignInAccount.authentication;
-
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Home_Screen()),
-      );
-    }
   }
 }
