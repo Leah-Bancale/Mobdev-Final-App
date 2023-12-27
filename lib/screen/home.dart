@@ -1,69 +1,105 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:mobdev_final_app/const/colors.dart';
 import 'package:mobdev_final_app/screen/add_note_screen.dart';
+import 'package:mobdev_final_app/screen/advice.dart';
+import 'package:mobdev_final_app/screen/profile.dart';
 import 'package:mobdev_final_app/widgets/stream_note.dart';
 
 class Home_Screen extends StatefulWidget {
-  const Home_Screen({super.key});
+  const Home_Screen({Key? key}) : super(key: key);
 
   @override
-  State<Home_Screen> createState() => _Home_ScreenState();
+  State<Home_Screen> createState() => _HomeScreen_State();
 }
 
-bool show = true;
+class _HomeScreen_State extends State<Home_Screen> {
+  int _selectedIndex = 0;
+  final List<Widget> _pages = [
+    HomeTab(),
+    AdvicePage(),
+    ProfilePage(),
+  ];
 
-class _Home_ScreenState extends State<Home_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColors,
-      floatingActionButton: Visibility(
-        visible: show,
-        child: FloatingActionButton(
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => Add_creen(),
-            ));
-          },
-          backgroundColor: custom_green,
-          child: Icon(
-            Icons.add,
-            size: 30,
-            color: Colors.white, // Set icon color to white
-          ),
-        ),
-      ),
-      body: SafeArea(
-        child: NotificationListener<UserScrollNotification>(
-          onNotification: (notification) {
-            if (notification.direction == ScrollDirection.forward) {
-              setState(() {
-                show = true;
-              });
-            }
-            if (notification.direction == ScrollDirection.reverse) {
-              setState(() {
-                show = false;
-              });
-            }
-            return true;
-          },
-          child: Column(
-            children: [
-              Stream_note(false),
-              Text(
-                'Done',
-                style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey.shade500,
-                    fontWeight: FontWeight.bold),
+      floatingActionButton: _selectedIndex == 0
+          ? FloatingActionButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => Add_creen(),
+                ));
+              },
+              backgroundColor: custom_green,
+              child: Icon(
+                Icons.add,
+                size: 30,
+                color: Colors.white,
               ),
-              Stream_note(true),
-            ],
+            )
+          : null,
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: (int index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.pending_actions),
+            label: 'To Do',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: 'Daily Advice',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class HomeTab extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: SafeArea(
+        child: Column(
+          children: [
+            Stream_note(false),
+            Text(
+              'Finished Task',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey.shade500,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Stream_note(true),
+          ],
         ),
       ),
     );
+  }
+}
+
+class AdvicePage extends StatelessWidget {
+  @override
+   Widget build(BuildContext context) {
+    return AdviceScreen(); // Display the Profile screen when the third tab is selected
+  }
+}
+
+class ProfilePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Profile(); // Display the Profile screen when the third tab is selected
   }
 }

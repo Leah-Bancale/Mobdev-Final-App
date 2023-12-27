@@ -206,18 +206,76 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
     );
   }
 
-  Widget image() {
+Widget image() {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 15),
+    child: Column(
+      children: [
+        Container(
+          width: double.infinity,
+          height: 300,
+          decoration: BoxDecoration(
+            color: backgroundColors,
+            image: const DecorationImage(
+              image: AssetImage('images/7.png'),
+              fit: BoxFit.fitWidth,
+            ),
+          ),
+        ),
+        SizedBox(height: 10), // Adjust the spacing between the image and text
+        Text(
+          'WELCOME BACK', // Your app name here
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        SizedBox(height: 10), // Increase the spacing between text and email field
+      ],
+    ),
+  );
+}
+
+
+
+  Widget signInGoogle() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: Container(
-        width: double.infinity,
-        height: 300,
-        decoration: BoxDecoration(
-          color: backgroundColors,
-          image: const DecorationImage(
-            image: AssetImage('images/7.png'),
-            fit: BoxFit.fitWidth,
+      child: OutlinedButton(
+        onPressed: () {
+          // Call the signInWithGoogle method when the button is pressed
+          // AuthenticationRemote().signInWithGoogle();
+        },
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+          foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              side: BorderSide(color: Colors.black), // Add border color
+            ),
           ),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset(
+                'images/google.png',
+                width: 24, // Adjust width of the Google logo
+                height: 24, // Adjust height of the Google logo
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12.0),
+              child: Text(
+                'Sign in with Google',
+                style: TextStyle(fontSize: 16), // Adjust text size
+              ),
+            ),
+          ],
         ),
       ),
     );
