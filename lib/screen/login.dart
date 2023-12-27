@@ -208,22 +208,38 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
     );
   }
 
-  Widget image() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: Container(
-        width: double.infinity,
-        height: 300,
-        decoration: BoxDecoration(
-          color: backgroundColors,
-          image: const DecorationImage(
-            image: AssetImage('images/7.png'),
-            fit: BoxFit.fitWidth,
+Widget image() {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 15),
+    child: Column(
+      children: [
+        Container(
+          width: double.infinity,
+          height: 300,
+          decoration: BoxDecoration(
+            color: backgroundColors,
+            image: const DecorationImage(
+              image: AssetImage('images/7.png'),
+              fit: BoxFit.fitWidth,
+            ),
           ),
         ),
-      ),
-    );
-  }
+        SizedBox(height: 10), // Adjust the spacing between the image and text
+        Text(
+          'WELCOME BACK', // Your app name here
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        SizedBox(height: 10), // Increase the spacing between text and email field
+      ],
+    ),
+  );
+}
+
+
 
   Widget signInGoogle() {
     return Padding(
