@@ -4,6 +4,7 @@ import 'package:mobdev_final_app/screen/add_note_screen.dart';
 import 'package:mobdev_final_app/screen/advice.dart';
 import 'package:mobdev_final_app/screen/profile.dart';
 import 'package:mobdev_final_app/widgets/stream_note.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Home_Screen extends StatefulWidget {
   const Home_Screen({Key? key}) : super(key: key);
@@ -22,6 +23,8 @@ class _HomeScreen_State extends State<Home_Screen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;
+
     return Scaffold(
       backgroundColor: backgroundColors,
       floatingActionButton: _selectedIndex == 0
@@ -75,7 +78,7 @@ class HomeTab extends StatelessWidget {
           children: [
             Stream_note(false),
             Text(
-              'Done',
+              'Welcome',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey.shade500,
@@ -92,7 +95,7 @@ class HomeTab extends StatelessWidget {
 
 class AdvicePage extends StatelessWidget {
   @override
-   Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return AdviceScreen(); // Display the Profile screen when the third tab is selected
   }
 }

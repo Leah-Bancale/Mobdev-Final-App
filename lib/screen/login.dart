@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobdev_final_app/const/colors.dart';
 import 'package:mobdev_final_app/data/auth_data.dart';
+import 'package:mobdev_final_app/provider/google_sign_in.dart';
+import 'package:provider/provider.dart';
 
 class LogIN_Screen extends StatefulWidget {
   final VoidCallback show;
@@ -230,8 +232,9 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: OutlinedButton(
         onPressed: () {
-          // Call the signInWithGoogle method when the button is pressed
-          // AuthenticationRemote().signInWithGoogle();
+          final provider =
+              Provider.of<GoogleSignInProvider>(context, listen: false);
+          provider.googleLogin();
         },
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
