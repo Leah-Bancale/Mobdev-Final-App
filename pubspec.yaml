@@ -30,13 +30,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-<<<<<<< HEAD
-  firebase_auth: ^4.3.0
-  cloud_firestore: ^4.5.0
-=======
   firebase_auth: ^4.15.3
   cloud_firestore: ^4.13.6
->>>>>>> 841f99272d9ed4d3b60fc38cbfa9f54f3cf544aa
   msh_checkbox: ^1.1.1 
   uuid: ^3.0.6
   firebase_core: 2.24.2 
