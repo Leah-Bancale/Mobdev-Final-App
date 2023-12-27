@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mobdev_final_app/const/colors.dart';
 import 'package:mobdev_final_app/data/auth_data.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:mobdev_final_app/screen/home.dart';
 
 class LogIN_Screen extends StatefulWidget {
   final VoidCallback show;
@@ -229,10 +233,7 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: OutlinedButton(
-        onPressed: () {
-          // Call the signInWithGoogle method when the button is pressed
-          // AuthenticationRemote().signInWithGoogle();
-        },
+        onPressed: () => _handleSignInWithGoogle(context),
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
           foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
@@ -265,5 +266,29 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
         ),
       ),
     );
+  }
+
+  Future<void> _handleSignInWithGoogle(BuildContext context) async {
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+    final GoogleSignInAccount? googleSignInAccount =
+        await _googleSignIn.signIn();
+
+    if (googleSignInAccount != null) {
+      final GoogleSignInAuthentication googleAuth =
+          await googleSignInAccount.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Home_Screen()),
+      );
+    }
   }
 }
