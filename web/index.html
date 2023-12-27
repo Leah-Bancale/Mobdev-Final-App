@@ -19,6 +19,7 @@
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="A new Flutter project.">
+  <meta name="google-signin-client_id" content="471760942637-ib5ppcf9qm1j0u9sujfj4nj4sifvf332.apps.googleusercontent.com">
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -40,6 +41,10 @@
   <script src="flutter.js" defer></script>
 </head>
 <body>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+
   <script>
     window.addEventListener('load', function(ev) {
       // Download main.dart.js
@@ -54,6 +59,20 @@
         }
       });
     });
+  </script>
+  <script>
+const firebaseConfig = {
+  apiKey: "AIzaSyBw6TW_D8T7JUQ5UyCo8l4PxLVzStVG-Qs",
+  authDomain: "mobdev-finals.firebaseapp.com",
+  projectId: "mobdev-finals",
+  storageBucket: "mobdev-finals.appspot.com",
+  messagingSenderId: "471760942637",
+  appId: "1:471760942637:web:172ad29db424387d85eaa4",
+  measurementId: "G-B1QLEMFBC7"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
   </script>
 </body>
 </html>
