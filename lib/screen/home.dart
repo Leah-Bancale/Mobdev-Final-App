@@ -75,7 +75,7 @@ class HomeTab extends StatelessWidget {
           children: [
             Stream_note(false),
             Text(
-              'Finished Task',
+              'Done',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey.shade500,
