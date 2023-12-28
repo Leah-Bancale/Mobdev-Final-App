@@ -20,14 +20,14 @@ class _Task_WidgetState extends State<Task_Widget> {
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: Container(
         width: double.infinity,
-        height: 130,
+        height: 150,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              spreadRadius: 5,
+              color: custom_green.withOpacity(0.2),
+              spreadRadius: 2,
               blurRadius: 7,
               offset: Offset(0, 2),
             ),
@@ -72,7 +72,7 @@ class _Task_WidgetState extends State<Task_Widget> {
                     Text(
                       widget._note.subtitle,
                       style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 13,
                           fontWeight: FontWeight.w400,
                           color: Colors.grey.shade400),
                     ),
@@ -90,12 +90,12 @@ class _Task_WidgetState extends State<Task_Widget> {
 
   Widget edit_time() {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         children: [
           Container(
-            width: 90,
-            height: 28,
+            width: 85,
+            height: 25,
             decoration: BoxDecoration(
               color: custom_green,
               borderRadius: BorderRadius.circular(18),
@@ -103,7 +103,7 @@ class _Task_WidgetState extends State<Task_Widget> {
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 12,
-                vertical: 6,
+                vertical: 4,
               ),
               child: Row(
                 children: [
@@ -113,7 +113,7 @@ class _Task_WidgetState extends State<Task_Widget> {
                     widget._note.time,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 14,
+                      fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -121,7 +121,7 @@ class _Task_WidgetState extends State<Task_Widget> {
               ),
             ),
           ),
-          SizedBox(width: 20),
+          SizedBox(width: 10),
           GestureDetector(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
@@ -129,8 +129,8 @@ class _Task_WidgetState extends State<Task_Widget> {
               ));
             },
             child: Container(
-              width: 90,
-              height: 28,
+              width: 80,
+              height: 25,
               decoration: BoxDecoration(
                 color: Color(0xffE2F6F1),
                 borderRadius: BorderRadius.circular(18),
@@ -138,7 +138,7 @@ class _Task_WidgetState extends State<Task_Widget> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
-                  vertical: 6,
+                  vertical: 4,
                 ),
                 child: Row(
                   children: [
@@ -147,7 +147,7 @@ class _Task_WidgetState extends State<Task_Widget> {
                     Text(
                       'edit',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 12,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -163,7 +163,7 @@ class _Task_WidgetState extends State<Task_Widget> {
 
   Widget imageee() {
     return Container(
-      height: 130,
+      height: 140,
       width: 100,
       decoration: BoxDecoration(
         color: Colors.white,

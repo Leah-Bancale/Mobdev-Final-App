@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mobdev_final_app/data/auth_data.dart';
 
 class Profile extends StatelessWidget {
   final User? user = FirebaseAuth.instance.currentUser;
@@ -33,7 +34,7 @@ class Profile extends StatelessWidget {
                   SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
-                      FirebaseAuth.instance.signOut();
+                      AuthenticationRemote().signOut();
                       // You may navigate to another screen after logout
                     },
                     child: Text('Logout'),

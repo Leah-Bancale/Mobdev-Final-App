@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mobdev_final_app/const/colors.dart';
 import 'package:mobdev_final_app/data/auth_data.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:mobdev_final_app/screen/home.dart';
 
 class LogIN_Screen extends StatefulWidget {
   final VoidCallback show;
@@ -244,8 +248,7 @@ Widget image() {
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: OutlinedButton(
         onPressed: () {
-          // Call the signInWithGoogle method when the button is pressed
-          // AuthenticationRemote().signInWithGoogle();
+         AuthenticationRemote().signInWithGoogle();
         },
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
@@ -253,7 +256,7 @@ Widget image() {
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
-              side: BorderSide(color: Colors.black), // Add border color
+              side: BorderSide(color: Colors.black),
             ),
           ),
         ),
@@ -264,8 +267,8 @@ Widget image() {
               padding: const EdgeInsets.all(8.0),
               child: Image.asset(
                 'images/google.png',
-                width: 24, // Adjust width of the Google logo
-                height: 24, // Adjust height of the Google logo
+                width: 24,
+                height: 24,
               ),
             ),
             Padding(
