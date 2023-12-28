@@ -53,7 +53,7 @@ class _Edit_ScreenState extends State<Edit_Screen> {
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             primary: custom_green,
-            minimumSize: Size(170, 48),
+            minimumSize: Size(150, 48),
           ),
           onPressed: () {
             Firestore_Datasource().Update_Note(
@@ -61,14 +61,14 @@ class _Edit_ScreenState extends State<Edit_Screen> {
             Navigator.pop(context);
           },
           child: Text(
-            'Add Task',
+            'Edit Task',
             style: TextStyle(color: Colors.white), // Set text color to white
           ),
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             primary: Color.fromARGB(255, 254, 255, 245),
-            minimumSize: Size(170, 48),
+            minimumSize: Size(150, 48),
           ),
           onPressed: () {
             Navigator.pop(context);

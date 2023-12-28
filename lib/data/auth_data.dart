@@ -26,7 +26,7 @@ class AuthenticationRemote extends AuthenticationDatasource {
           .createUserWithEmailAndPassword(
               email: email.trim(), password: password.trim())
           .then((value) {
-        Firestore_Datasource().CreateUser(email);
+        Firestore_Datasource().CreateUser(email, password);
       });
     }
   }
@@ -52,6 +52,16 @@ class AuthenticationRemote extends AuthenticationDatasource {
     } catch (error) {
       print('Error signing in with Google: $error');
       return null; // Handle sign-in errors
+    }
+  }
+
+  Future<void> signOut() async {
+    try {
+      await _auth.signOut(); // Sign out from Firebase Auth
+      await _googleSignIn.signOut(); // Disconnect from Google Sign-In
+    } catch (error) {
+      print('Error signing out: $error');
+      // Handle sign-out errors if needed
     }
   }
 }

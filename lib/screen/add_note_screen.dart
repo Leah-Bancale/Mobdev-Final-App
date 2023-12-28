@@ -56,7 +56,7 @@ class _Add_creenState extends State<Add_creen> {
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             primary: custom_green,
-            minimumSize: Size(170, 48),
+            minimumSize: Size(150, 48),
           ),
           onPressed: () {
             Firestore_Datasource().AddNote(subtitle.text, title.text, indexx);
@@ -70,7 +70,7 @@ class _Add_creenState extends State<Add_creen> {
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             primary: Color.fromARGB(255, 254, 255, 245),
-            minimumSize: Size(170, 48),
+            minimumSize: Size(150, 48),
           ),
           onPressed: () {
             Navigator.pop(context);
