@@ -75,7 +75,7 @@ class HomeTab extends StatelessWidget {
           children: [
             Stream_note(false),
             Text(
-              'Done',
+              'Finished Task',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey.shade500,
@@ -93,13 +93,13 @@ class HomeTab extends StatelessWidget {
 class AdvicePage extends StatelessWidget {
   @override
    Widget build(BuildContext context) {
-    return AdviceScreen(); // Display the Profile screen when the third tab is selected
+    return AdviceScreen(); 
   }
 }
 
 class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Profile(); // Display the Profile screen when the third tab is selected
+    return Profile(); 
   }
 }

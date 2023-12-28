@@ -107,7 +107,7 @@ class _Task_WidgetState extends State<Task_Widget> {
               ),
               child: Row(
                 children: [
-                  Image.asset('images/icon_time.png'),
+                  Icon(Icons.timelapse, color: Colors.white, size: 18),
                   SizedBox(width: 10),
                   Text(
                     widget._note.time,

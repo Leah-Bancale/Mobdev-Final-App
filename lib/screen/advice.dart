@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:mobdev_final_app/const/colors.dart';
 
 class Advice {
   final String advice;
@@ -41,8 +42,12 @@ class _AdviceScreenState extends State<AdviceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Advice'),
-        leading: Icon(Icons.lightbulb_outline), // Adding a bulb icon
+        title: Text(
+          'Advice',
+          style: TextStyle(color: Colors.white),
+        ),
+        leading: Icon(Icons.lightbulb_outline, color: Colors.white),
+        backgroundColor: custom_green,
       ),
       body: Center(
         child: FutureBuilder<Advice>(
@@ -58,27 +63,8 @@ class _AdviceScreenState extends State<AdviceScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      padding: EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Column(
-                        children: [
-                          Icon(
-                            Icons.lightbulb_outline,
-                            size: 100,
-                            color: Colors.yellow,
-                          ),
-                          SizedBox(height: 20),
-                          Text(
-                            snapshot.data?.advice ?? 'No advice available',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 18),
-                          ),
-                        ],
-                      ),
+                    BoxedMessage(
+                      message: snapshot.data?.advice ?? 'No advice available',
                     ),
                   ],
                 ),
@@ -86,6 +72,52 @@ class _AdviceScreenState extends State<AdviceScreen> {
             }
           },
         ),
+      ),
+    );
+  }
+}
+
+class BoxedMessage extends StatelessWidget {
+  final String message;
+
+  const BoxedMessage({required this.message});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.8, // 80% of screen width
+      padding: EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: custom_green,
+          width: 2,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 3,
+            blurRadius: 5,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.lightbulb_outline,
+            size: 80,
+            color: Colors.yellow,
+          ),
+          SizedBox(height: 20),
+          Text(
+            message,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 20, color: Colors.black),
+          ),
+        ],
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mobdev_final_app/const/colors.dart';
 import 'package:mobdev_final_app/data/auth_data.dart';
 
 class Profile extends StatelessWidget {
@@ -9,7 +10,11 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
+        title: Text(
+          'Profile',
+          style: TextStyle(color: Colors.white), // Changing app bar font color
+        ),
+        backgroundColor: custom_green, // Changing app bar background color
       ),
       body: Center(
         child: user != null
@@ -18,7 +23,7 @@ class Profile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CircleAvatar(
-                    backgroundColor: Colors.grey,
+                    backgroundColor: custom_green,
                     radius: 50,
                     child: Icon(
                       Icons.person,
