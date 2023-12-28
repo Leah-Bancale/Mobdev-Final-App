@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:mobdev_final_app/const/colors.dart';
 
 class Advice {
   final String advice;
@@ -30,6 +31,7 @@ class AdviceScreen extends StatefulWidget {
 
 class _AdviceScreenState extends State<AdviceScreen> {
   late Future<Advice> futureAdvice;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -37,12 +39,28 @@ class _AdviceScreenState extends State<AdviceScreen> {
     futureAdvice = Advice.fetchAdvice();
   }
 
+  void reloadAdvice() {
+    if (!isLoading) {
+      setState(() {
+        isLoading = true;
+      });
+
+      // Simulate the time it takes to fetch new advice (adjust the duration as needed)
+      Future.delayed(Duration(seconds: 2), () {
+        setState(() {
+          futureAdvice = Advice.fetchAdvice();
+          isLoading = false;
+        });
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Advice'),
-        leading: Icon(Icons.lightbulb_outline), // Adding a bulb icon
+        leading: Icon(Icons.lightbulb_outline),
       ),
       body: Center(
         child: FutureBuilder<Advice>(
@@ -76,6 +94,22 @@ class _AdviceScreenState extends State<AdviceScreen> {
                             snapshot.data?.advice ?? 'No advice available',
                             textAlign: TextAlign.center,
                             style: TextStyle(fontSize: 18),
+                          ),
+                          SizedBox(height: 20),
+                          ElevatedButton(
+                            onPressed: reloadAdvice,
+                            style: ElevatedButton.styleFrom(
+                              primary: custom_green,
+                              onPrimary: Colors.white,
+                              padding: EdgeInsets.all(15),
+                            ),
+                            child: isLoading
+                                ? CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      Colors.white,
+                                    ),
+                                  )
+                                : Text('Get Another Quote'),
                           ),
                         ],
                       ),
