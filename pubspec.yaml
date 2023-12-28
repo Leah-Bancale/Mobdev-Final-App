@@ -34,8 +34,7 @@ dependencies:
   cloud_firestore: ^4.13.6
   msh_checkbox: ^1.1.1 
   uuid: ^3.0.6
-  firebase_core: ^2.24.2 
-  google_sign_in: ^6.2.1
+  firebase_core: 2.24.2 
 
 
 
