@@ -44,9 +44,9 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: 20),
+              SizedBox(height: 5),
               image(),
-              SizedBox(height: 50),
+              SizedBox(height: 10),
               emailField(email, _focusNode1, 'Email', Icons.email),
               SizedBox(height: 10),
               passwordField(password, _focusNode2, 'Password', Icons.password),
@@ -54,6 +54,8 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
               account(),
               SizedBox(height: 20),
               Login_bottom(),
+              SizedBox(height: 20),
+              signInGoogle(),
             ],
           ),
         ),
@@ -210,38 +212,22 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
     );
   }
 
-Widget image() {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 15),
-    child: Column(
-      children: [
-        Container(
-          width: double.infinity,
-          height: 300,
-          decoration: BoxDecoration(
-            color: backgroundColors,
-            image: const DecorationImage(
-              image: AssetImage('images/7.png'),
-              fit: BoxFit.fitWidth,
-            ),
+  Widget image() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Container(
+        width: double.infinity,
+        height: 300,
+        decoration: BoxDecoration(
+          color: backgroundColors,
+          image: const DecorationImage(
+            image: AssetImage('images/7.png'),
+            fit: BoxFit.fitWidth,
           ),
         ),
-        SizedBox(height: 10), // Adjust the spacing between the image and text
-        Text(
-          'WELCOME BACK', // Your app name here
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
-        SizedBox(height: 10), // Increase the spacing between text and email field
-      ],
-    ),
-  );
-}
-
-
+      ),
+    );
+  }
 
   Widget signInGoogle() {
     return Padding(

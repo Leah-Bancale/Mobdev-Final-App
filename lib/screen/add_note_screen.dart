@@ -84,61 +84,43 @@ class _Add_creenState extends State<Add_creen> {
     );
   }
 
-Container imagess() {
-  List<String> titles = ['Work', 'Home', 'Leisure', 'Misc'];
-
-  return Container(
-    height: 180,
-    child: ListView.builder(
-      itemCount: 4,
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: () {
-            setState(() {
-              indexx = index;
-            });
-          },
-          child: Padding(
-            padding: EdgeInsets.only(left: index == 0 ? 7 : 0),
-            child: Container(
-              width: 140,
-              margin: EdgeInsets.all(8),
-              child: Column(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    height: 120, // Set the desired height for the images
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                        width: 2,
-                        color: indexx == index ? custom_green : Colors.grey,
-                      ),
-                    ),
-                    child: Image.asset(
-                      'images/${index}.png',
-                      fit: BoxFit.cover, // Use BoxFit.cover for uniform sizing
-                    ),
+  Container imagess() {
+    return Container(
+      height: 180,
+      child: ListView.builder(
+        itemCount: 4,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {
+              setState(() {
+                indexx = index;
+              });
+            },
+            child: Padding(
+              padding: EdgeInsets.only(left: index == 0 ? 7 : 0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    width: 2,
+                    color: indexx == index ? custom_green : Colors.grey,
                   ),
-                  SizedBox(height: 4),
-                  Text(
-                    titles[index],
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+                ),
+                width: 140,
+                margin: EdgeInsets.all(8),
+                child: Column(
+                  children: [
+                    Image.asset('images/${index}.png'),
+                  ],
+                ),
               ),
             ),
-          ),
-        );
-      },
-    ),
-  );
-}
+          );
+        },
+      ),
+    );
+  }
 
   Widget title_widgets() {
     return Padding(
@@ -176,22 +158,21 @@ Container imagess() {
     );
   }
 
-Padding subtitle_widgets() {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 15),
-    child: Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: SingleChildScrollView(
+  Padding subtitle_widgets() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+        ),
         child: TextField(
-          maxLines: null, // Allow unlimited lines
+          maxLines: 3,
           controller: subtitle,
           focusNode: _focusNode2,
           style: TextStyle(fontSize: 18, color: Colors.black),
           decoration: InputDecoration(
-            labelText: 'Details',
+            labelText: 'Details', // Add the label for the subtitle field
             contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
             hintText: 'Enter details',
             enabledBorder: OutlineInputBorder(
@@ -211,8 +192,6 @@ Padding subtitle_widgets() {
           ),
         ),
       ),
-    ),
-  );
-}
-
+    );
+  }
 }
