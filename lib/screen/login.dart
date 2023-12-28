@@ -47,6 +47,15 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
               SizedBox(height: 5),
               image(),
               SizedBox(height: 10),
+              Text(
+                'WELCOME BACK',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(height: 10),
               emailField(email, _focusNode1, 'Email', Icons.email),
               SizedBox(height: 10),
               passwordField(password, _focusNode2, 'Password', Icons.password),
@@ -234,7 +243,7 @@ class _LogIN_ScreenState extends State<LogIN_Screen> {
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: OutlinedButton(
         onPressed: () {
-         AuthenticationRemote().signInWithGoogle();
+          AuthenticationRemote().signInWithGoogle();
         },
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(Colors.white),

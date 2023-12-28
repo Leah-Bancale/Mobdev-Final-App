@@ -46,13 +46,26 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
             children: [
               SizedBox(height: 20),
               image(),
+              SizedBox(height: 10),
+              Text(
+                'SIGN UP',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
               SizedBox(height: 50),
               emailfield(email, _focusNode1, 'Email', Icons.email),
               SizedBox(height: 10),
               passwordfield(password, _focusNode2, 'Password', Icons.password),
               SizedBox(height: 10),
-              passwordfield(PasswordConfirm, _focusNode3, 'Confirm Password',
-                  Icons.password),
+              passwordfield(
+                PasswordConfirm,
+                _focusNode3,
+                'Confirm Password',
+                Icons.password,
+              ),
               SizedBox(height: 8),
               account(),
               SizedBox(height: 20),
